@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!----CSS -->
     <link rel="stylesheet" href="testing1.css">
-     
+
     <!---- Iconscout-->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <title>Admin Dashboard Panel</title> 
+    <title>Admin Dashboard Panel</title>
 </head>
+
 <body>
     <nav>
         <div class="logo-name">
             <div class="logo-image">
                 <a href="dashboard.html">
-                <img src="Eagle eye 1.svg" alt="">
-            </a>
+                    <img src="Eagle eye 1.svg" alt="">
+                </a>
             </div>
             <span class="logo_name">Eagle Eye</span>
         </div>
@@ -33,14 +34,14 @@
                         <span class="link-name">Dashboard</span>
                     </a>
                 </li>
-            
+
                 <li>
                     <a href="taskguard.html">
                         <i class="uil uil-schedule"></i>
                         <span class="link-name">Manage</span>
                     </a>
                 </li>
-        
+
                 <li>
                     <a href="findajob.html">
                         <i class="uil uil-search-alt"></i>
@@ -55,18 +56,18 @@
                 </li>
             </ul>
             <ul class="logout-mode">
-        
+
                 <li><a href="login.html">
                         <i class="uil uil-signout"></i>
                         <span class="link-name">Logout</span>
                     </a></li>
-        
+
                 <li class="mode">
                     <a href="#">
                         <i class="uil uil-moon"></i>
                         <span class="link-name">Dark Mode</span>
                     </a>
-        
+
                     <div class="mode-toggle">
                         <span class="switch"></span>
                     </div>
@@ -74,10 +75,10 @@
             </ul>
         </div>
     </nav>
-    
+
     <section class="dashboard">
         <div class="top">
-           <i class="uil uil-bars sidebar-toggle"></i>
+            <i class="uil uil-bars sidebar-toggle"></i>
             <!---<div class="search-box">
                 <i class="uil uil-search"></i>
                 <input type="text" placeholder="Find...">
@@ -92,60 +93,54 @@
 
 
         <div class="dash-content">
-           
+
 
             <div class="activity">
                 <div class="title">
                     <i class="uil uil-pen"></i>
-                    <span class="text">Post a Job</span>
+                    <span class="text">Are you sure you want to delete this job?</span>
                 </div>
 
                 <div class="activity-reflect">
                     <div class="data categories">
                         <span class="data-title">Title</span>
-                        <!--<span class="data-title">Type of Job</span>-->
+                        <span class="data-title">PLM EMAIL</span>
+                        <span class="data-title">Type of Job</span>
+                        <span class="data-title">Status</span>
                         <span class="data-title">Information</span>
-                        
+
+
                     </div>
                     <br>
                     <div class="data info">
-                    <span class="data-list">
-                        <div class="input-box">
-                            <input type="text" placeholder="Title" id="jobtitle">
-                        </div>
-                    </span>
-                
-                    <!--<span class="data-list">
-                        <div class="input-box">
-                            <input type="text" placeholder="Type of Job" id="jobtype">
-                        </div>
-                    </span>-->
-                    
-                    <span class="data-list">
-                        <div class="input-box">
-                            <input type="text" placeholder="Information" id="jobinfo">
-                        </div>
-                    </span>
-
-                    <span class="buttons">
-                        <span class="data-list">
-                        <button type="button" class="button" onclick="window.location.href='dashboard.html' ">Back</button>
-                        <button type="button" class="button" id="submit" onclick="window.location.href='dashboard.html' ">Submit</button>
+                        <span class="data-title">Title</span>
+                        <span class="data-title">PLM Email</span>
+                        <span class="data-title">Type of Job</span>
+                        <span class="data-title">Status</span>
+                        <span class="data-title">Information</span>
+                        <span class="buttons">
+                            <span class="data-list">
+                                <button type="button" class="button"
+                                    onclick="window.location.href='findajob.html' ">No</button>
+                                <button type="button" class="button"
+                                    onclick="window.location.href='dashboard.html' ">Yes</button>
+                            </span>
                         </span>
-                    </span>
-                
-                </div>
-                   
-                    
-                    
+                    </div>
 
-                    
 
-                    
+
+
+
+
+
                 </div>
             </div>
         </div>
     </section>
-    <script src="testing1.js"></script>
+    <section class="dashboard">
+
+        <script src="testing1.js"></script>
 </body>
+
 </html>
