@@ -346,7 +346,7 @@ nav.close ~ .dashboard .top{
     width: 100%;
 }
 
-.dash-content .activity .activity-data {
+.manage-content .activity .activity-data {
     display: flex;
     justify-content: space-between;
     align-items: center;
