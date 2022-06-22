@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <!----CSS -->
-    <link rel="stylesheet" href="testing1.css">
-
+    <link rel="stylesheet" href="/templates/css/style.css">
+     
     <!---- Iconscout-->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Admin Dashboard Panel</title>
+    <title>Admin Dashboard Panel</title> 
 </head>
-
 <body>
     <nav>
         <div class="logo-name">
             <div class="logo-image">
-                <a href="dashboard.html">
-                    <img src="Eagle eye 1.svg" alt="">
-                </a>
+                <a href="/pages/dashboard.html">
+                <img src="/images/Eagle eye 1.svg eye 1.svg" alt="">
+            </a>
             </div>
             <span class="logo_name">Eagle Eye</span>
         </div>
@@ -29,45 +27,45 @@
         <div class="menu-items">
             <ul class="nav-links">
                 <li>
-                    <a href="dashboard.html">
+                    <a href="/pages/dashboard.html">
                         <i class="uil uil-home"></i>
                         <span class="link-name">Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="taskguard.html">
+                    <a href="/pages/taskguard.html">
                         <i class="uil uil-schedule"></i>
                         <span class="link-name">Manage</span>
                     </a>
                 </li>
-
+        
                 <li>
-                    <a href="findajob.html">
+                    <a href="/pages/findajob.html" >
                         <i class="uil uil-search-alt"></i>
-                        <span class="link-name">Find</span>
+                        <span class="link-name" id="find">Find</span>
                     </a>
                 </li>
                 <li>
-                    <a href="postajob.html">
+                    <a href="/pages/postajob.html">
                         <i class="uil uil-clipboard-alt"></i>
                         <span class="link-name">Post</span>
                     </a>
                 </li>
             </ul>
             <ul class="logout-mode">
-
-                <li><a href="login.html">
+        
+                <li><a href="/pages/login.html">
                         <i class="uil uil-signout"></i>
                         <span class="link-name">Logout</span>
                     </a></li>
-
+        
                 <li class="mode">
                     <a href="#">
                         <i class="uil uil-moon"></i>
                         <span class="link-name">Dark Mode</span>
                     </a>
-
+        
                     <div class="mode-toggle">
                         <span class="switch"></span>
                     </div>
@@ -75,17 +73,17 @@
             </ul>
         </div>
     </nav>
-
+    
     <section class="dashboard">
         <div class="top">
-            <i class="uil uil-bars sidebar-toggle"></i>
+           <i class="uil uil-bars sidebar-toggle"></i>
             <!---<div class="search-box">
                 <i class="uil uil-search"></i>
                 <input type="text" placeholder="Find...">
                 <img src="images/profile.jpg" alt="">
             </div>-->
-            <a href="profile.html">
-                <img src="Eagle eye 1.svg" alt="">
+            <a href="/pages/profile.html">
+                <img src="/images/Eagle eye 1.svg" alt="">
             </a>
         </div>
 
@@ -93,12 +91,12 @@
 
 
         <div class="dash-content">
-
+           
 
             <div class="activity">
                 <div class="title">
                     <i class="uil uil-pen"></i>
-                    <span class="text">Confirm Job</span>
+                    <span class="text">Job View</span>
                 </div>
 
                 <div class="activity-reflect">
@@ -109,7 +107,7 @@
                         <span class="data-title">Status</span>
                         <span class="data-title">Information</span>
 
-
+                    
                     </div>
                     <br>
                     <div class="data info">
@@ -118,30 +116,27 @@
                         <span class="data-title">Type of Job</span>
                         <span class="data-title">Status</span>
                         <span class="data-title">Information</span>
-                        <span class="buttons">
+                            <span class="buttons">
                             <span class="data-list">
-                                <button type="button" class="button"
-                                    onclick="window.location.href='findajob.html' ">Home</button>
-                                <button type="button" class="button"
-                                    onclick="window.location.href='dashboard.html' ">Confirm</button>
-                                
+                            <button type="button" class="button" onclick="window.location.href='/pages/findajob.html' ">Back</button>  
+                            <button type="button" class="button" onclick="window.location.href='/pages/dashboard.html' ">Apply</button>
+                            <button type="button" class="button" onclick="window.location.href='/pages/editjob.html' ">Edit</button>
                             </span>
-                        </span>
+                            </span>
                     </div>
+                   
+                    
+                    
 
+                    
 
-
-
-
-
-
+                    
                 </div>
             </div>
         </div>
     </section>
     <section class="dashboard">
 
-        <script src="testing1.js"></script>
+    <script src="/templates/javascript/find.js"></script>
 </body>
-
 </html>
