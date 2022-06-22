@@ -56,17 +56,68 @@ sidebarToggle.addEventListener("click", () => {
  }
  
 //API CALLING
+/*
+let   logEmail = document.querySelector('#loginEmail').value,
+      logPassword = document.querySelector('#loginPassword').value,
+      signEmail = document.querySelector('#regEmail').value,
+      signPassword = document.querySelector('#regPassword').value;
 
-const output = document.querySelector('.activity-data');
-const submit = document.querySelector("#submit");
+const log = document.querySelector('#signIn'),
+      register = document.querySelector('#register'); 
 
+log.addEventListener('click', (e) => {
+  e.preventDefault();
+  
+
+  fetch('https://create-eagleeye.herokuapp.com/login', {
+    method: "POST",
+    headers: {
+      'Accept': "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      logEmail,logPassword
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      // code here //
+      if (data.error) {
+        alert("Error Password or Username"); 
+      } else {
+        window.open(
+          "dashboard.html"
+        ); 
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+register.addEventListener('click', () => {
+  fetch('https://create-eagleeye.herokuapp.com/login', {
+    method: "POST",
+    body: JSON.stringify({signEmail,signPassword}),
+    headers: {
+      'accept': 'application/json',
+      'Content-Type' : 'application/json',
+    }
+    
+  });
+});
+*/
+
+activeCounter = document.querySelector('#activeCounter');
+activeCounter.innerHTML = `${posts.length}`
 fetch('https://create-eagleeye.herokuapp.com/login', {
         method: 'POST',
         headers: {
             'accept': 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: 'grant_type=&username=fausto2018@plm.edu.ph&password=passkey&scope=&client_id=&client_secret='
+        body: 'grant_type=&username=jeadelante2018@plm.edu.ph&password=passkey&scope=&client_id=&client_secret='
     }).then(res => {
         return res.json();
     }).then(json => {
@@ -85,31 +136,47 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
             outjson(json);
         });
     
-    
-    submit.addEventListener('click', ()=> {
-    let title = document.querySelector('#jobtitle').value;
-    let content = document.querySelector('#jobinfo').value;
-    let formData = { title,content };
+const   submit = document.querySelector("#submit");  
+        submit.addEventListener('click', ()=> {
+        let title = document.querySelector('#jobtitle').value;
+        let content = document.querySelector('#jobinfo').value;
+        let formData = { title,content };
 
-    fetch('https://create-eagleeye.herokuapp.com/posts/', {
-        method: 'POST',
-        body: JSON.stringify(formData),
+        fetch('https://create-eagleeye.herokuapp.com/posts/', {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                    'accept': 'application/json',
+                    'Authorization': 'Bearer ' + json['access_token'],
+                    'Content-Type' : 'application/json'
+                },     
+            });
+
+
+
+const   delPost = document.querySelector("#delPost");
+        delPost.addEventListener('click', ()=> {
+        fetch('https://create-eagleeye.herokuapp.com/posts/' + idCatcher, {
+        method: 'DELETE',
         headers: {
                 'accept': 'application/json',
                 'Authorization': 'Bearer ' + json['access_token'],
                 'Content-Type' : 'application/json'
-            }
+            },     
+    });
+    
+
+
+
     });
 
-
-
-
-
-
 });
+
     
     });
 
+    let idCatcher;
+const output = document.querySelector('.activity-data');
 function outjson(val){
     console.log(val);
     let html = '';
@@ -120,7 +187,7 @@ function outjson(val){
                     <div class="activity-data">
                     <div class="data names">
                         <span class="data-title">ID</span>
-                        <span class="data-list">${ind+1}.</span> 
+                        <span class="data-list">${ele.id}.</span> 
                     </div>
                     <div class="data email">
                         <span class="data-title">Title</span>
@@ -140,7 +207,8 @@ function outjson(val){
                         <span class="data-title"></span>
                             <span class="buttonsView">
                             <span class="data-list">
-                            <button type="button" class="button" onclick="window.location.href='jobview.html' ">View</button>
+                            <button type="button" class="button" onclick='idCatcher=${ele.id}'>View</button>
+                            <button type="button" class="button" id='delPost' onclick='idCatcher=${ele.id}'>Delete</button>
                             </span>
                             </span>
                             </div>
@@ -157,6 +225,11 @@ function outjson(val){
 }
 
 
+function storeVar() {
+    var amount = document.getElementById('btn').getAttribute('ind');
+    console.log(amount);
+}
+
 function editPost(id){
 
     fetch(`https://create-eagleeye.herokuapp.com/posts/`)
@@ -168,3 +241,51 @@ function editPost(id){
         
     });
 }
+
+//LOGOUT
+const logout = document.querySelector("#logout");
+logout.addEventListener('click', ()=> {
+    window.localStorage.clear(); //clear all localstorage
+    window.open(
+          "login.html"
+        ); /*opens the target page while Id & password matches*/
+});
+
+
+//LOGIN-SIGNUP JS
+
+const container = document.querySelector(".container"),
+      pwShowHide = document.querySelectorAll(".showHidePw"),
+      pwFields = document.querySelectorAll(".password"),
+      signUp = document.querySelector(".signup-link"),
+      login = document.querySelector(".login-link");
+
+    //   js code to show/hide password and change icon
+    pwShowHide.forEach(eyeIcon =>{
+        eyeIcon.addEventListener("click", ()=>{
+            pwFields.forEach(pwField =>{
+                if(pwField.type ==="password"){
+                    pwField.type = "text";
+
+                    pwShowHide.forEach(icon =>{
+                        icon.classList.replace("uil-eye-slash", "uil-eye");
+                    })
+                }else{
+                    pwField.type = "password";
+
+                    pwShowHide.forEach(icon =>{
+                        icon.classList.replace("uil-eye", "uil-eye-slash");
+                    })
+                }
+            }) 
+        })
+    })
+
+    // js code to appear signup and login form
+    signUp.addEventListener("click", ( )=>{
+        container.classList.add("active");
+    });
+    login.addEventListener("click", ( )=>{
+        container.classList.remove("active");
+    });
+
