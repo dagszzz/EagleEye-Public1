@@ -60,7 +60,9 @@ sidebarToggle.addEventListener("click", () => {
 
 activeCounter = document.querySelector('#activeCounter');
 //activeCounter.innerHTML = `${posts.length}`
+let username = "ncrriego2019@plm.edu.ph";
 fetch('https://create-eagleeye.herokuapp.com/login', {
+    
         method: 'POST',
         headers: {
             'accept': 'application/json',
@@ -70,8 +72,9 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
     }).then(res => {
         return res.json();
     }).then(json => {
-        console.log(json['access_token']);
+        console.log(json);
 
+        console.log(json['access_token']);
     fetch('https://create-eagleeye.herokuapp.com/posts/', {
             method: 'GET',
             headers: {
@@ -173,7 +176,6 @@ function outjson(val){
                         <span class="data-title"></span>
                             <span class="buttonsView">
                             <span class="data-list">
-                            <button type="button" class="button">Select</button>
                             </span>
                             </span>
                             </div>
