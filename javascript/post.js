@@ -137,7 +137,14 @@ const   delButton = document.querySelector('.buttonPaper');
     //sa taas maglagay ng new codes
     });
 
-
+const logout = document.querySelector("#logout");
+logout.addEventListener('click', ()=> {
+    window.localStorage.clear(); //clear all localstorage
+    window.open(
+          "login.html"
+        ); 
+        
+});
 
 /*        
 
@@ -208,13 +215,4 @@ function editPost(id){
 }
 
 
-//LOGOUT
-/*
-const logout = document.querySelector("#logout");
-logout.addEventListener('click', ()=> {
-    window.localStorage.clear(); //clear all localstorage
-    window.open(
-          "login.html"
-        ); /*opens the target page while Id & password matches
-        
-});*/
+

@@ -164,7 +164,7 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
                                     <span class="data-title"></span>
                                         <span class="buttonsView">
                                         <span class="data-list">
-                                        <button type="button" class="button" href="javascript:void(0)" onClick="deleteMember(${ele.id})">Delete</button> <button type="button" class="button" href="/pages/edit.job.html" onClick="ViewMember(${ele.id})">Edit</button>
+                                        <button type="button" class="button" href="javascript:void(0)" onClick="deleteMember(${ele.id})">Delete</button> <button type="button" class="button" href="javascript:void(0)" onClick="ViewMember(${ele.id})">Edit</button>
                                         </span>
                                         </span>
                                         </div>
@@ -199,7 +199,7 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
             <div class="activity">
                 <div class="title">
                     <i class="uil uil-pen"></i>
-                    <span class="text">Post a Job</span>
+                    <span class="text">Edit Job</span>
                 </div>
 
                 <div class="activity-reflect">
@@ -226,8 +226,8 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
 
                     <span class="buttons">
                         <span class="data-list">
-                        <button type="button" class="button" onclick="window.location.href='/pages/dashboard.html' ">Back</button>
-                        <button type="button" class="button" id="updateId" >Update</button>
+                        <button type="button" class="button" onclick="window.location.href='/pages/taskguard.html' ">Back</button>
+                        <button type="button" class="button" href="/pages/manage.html" onClick="editMember(${val.id}) id="updateBtn">Update</button>
                         </span>
                     </span>
                 
@@ -250,43 +250,47 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
             }
 
         
-                    /*
-    const delButton = document.querySelector('.buttonAll');
-            delButton.onclick = () => {
+ 
+            function editMember(id){
+            token = localStorage.getItem('access_token');
+                    fetch(`https://create-eagleeye.herokuapp.com/posts/${id}`,{
+                    method: 'GET',
+                        headers :{
+                            'Content-Type' : 'application/json',
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(res => res.json())
+                    .then( (data) => {
 
-            fetch('https://create-eagleeye.herokuapp.com/posts/37', {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': 'Bearer ' + json['access_token'],
-                    'Content-Type' : 'application/json'
+                        document.querySelector('#jobtitle').value = data[0].title;
+                        document.querySelector('#jobinfo').value = data[0].content;
+                        
+                    });
+                
                 }
+            const update = document.querySelector('#updateBtn');
 
-            }).then(response => {
-                if (response.ok) {
-                    console.log("delete success");
-                }
-                else {
-                    console.log("delete failed");
-                }
-                return response;
-            }).then(response => console.log(response))
-            }
+                update.addEventListener('click', ()=> {
+                token = localStorage.getItem('access_token');
+                let title = document.querySelector('#jobtitle').value;
+                let content = document.querySelector('#jobinfo').value;
+                let formData = { title,content };
 
-*/
-/*
-function editPost(id){
+                
 
-    fetch(`https://create-eagleeye.herokuapp.com/posts/`)
-    .then(res => res.json())
-    .then( (data) => {
+                fetch('https://create-eagleeye.herokuapp.com/posts/', {
+                    method: 'PUT',
+                    body: JSON.stringify(formData),
+                    headers: {
+                        'Content-Type' : 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                })
+                    
 
-        document.querySelector('#jobtitle').value = data[0].title;
-        document.querySelector('#jobinfo').value = data[0].content;
         
-    });
-}
-*/
-
 //LOGOUT
 /*
 const logout = document.querySelector("#logout");
