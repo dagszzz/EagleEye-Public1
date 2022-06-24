@@ -55,9 +55,9 @@ sidebarToggle.addEventListener("click", () => {
      input.value = input.value.replace(limit,"");
  }
  
+
+ 
 //API CALLING
-
-
 activeCounter = document.querySelector('#activeCounter');
 //activeCounter.innerHTML = `${posts.length}`
 fetch('https://create-eagleeye.herokuapp.com/login', {
@@ -111,29 +111,6 @@ const   submit = document.querySelector("#submit");
                }).then(response => console.log(response));
                });
    
-/*
-const   delButton = document.querySelector('.buttonPaper');
-        delButton.addEventListener('click', () => {
-        let id=1;
-
-    fetch('https://create-eagleeye.herokuapp.com/posts/31', {
-         method: 'DELETE',
-         headers: {
-            'Authorization': 'Bearer ' + json['access_token'],
-            'Content-Type' : 'application/json'
-        }
-
-     }).then(response => {
-         if (response.ok) {
-             console.log("delete success");
-         }
-         else {
-             console.log("delete failed");
-         }
-         return response;
-     }).then(response => console.log(response))
-    });
-*/
     //sa taas maglagay ng new codes
     });
 
@@ -145,74 +122,3 @@ logout.addEventListener('click', ()=> {
         ); 
         
 });
-
-/*        
-
-const output = document.querySelector('.activity-data');
-function outjson(val){
-    console.log(val);
-    let view = '';
-    val.forEach((ele,ind) => {
-        console.log(ele);
-        view += `<div class="dash-content">
-                    <div class="activity">
-                    <div class="activity-data">
-                    <div class="data names">
-                        <span class="data-title">ID</span>
-                        <span class="data-list">${ele.id}.</span> 
-                    </div>
-                    <div class="data email">
-                        <span class="data-title">Title</span>
-                        <span class="data-list">${ele.title}</span>
-                    </div>
-                    
-                    <div class="data joined">
-                        <span class="data-title">Posted by</span>
-                        <span class="data-list">${ele.owner.email}</span>
-                    </div>
-
-                    <div class="data joined">
-                        <span class="data-title">Created at</span>
-                        <span class="data-list">${ele.owner.created_at}</span>
-                    </div>
-                    
-                    <div class="data type">
-                        <span class="data-title"></span>
-                            <span class="buttonsView">
-                            <span class="data-list">
-                            <button type="button" class="button">Select</button>
-                            </span>
-                            </span>
-                            </div>
-                    </div>
-                    `;
-        
-    })
-    //html += `<small>${JSON.stringify(val)}</small>`;
-    showJobs(view);
-   
-
-    
-}
-
-
-
-function showJobs(view){
-     output.innerHTML = view;
-}
-
-
-function editPost(id){
-
-    fetch(`https://create-eagleeye.herokuapp.com/posts/`)
-    .then(res => res.json())
-    .then( (data) => {
-
-        document.querySelector('#jobtitle').value = data[0].title;
-        document.querySelector('#jobinfo').value = data[0].content;
-        
-    });
-}
-
-
-

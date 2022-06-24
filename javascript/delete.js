@@ -2,6 +2,7 @@ const body = document.querySelector("body"),
       modeToggle = body.querySelector(".mode-toggle");
       sidebar = body.querySelector("nav");
       sidebarToggle = body.querySelector(".sidebar-toggle");
+const update = document.querySelector('#update');
 
 let getMode = localStorage.getItem("mode");
 if(getMode && getMode ==="dark"){
@@ -204,13 +205,16 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
 
                 <div class="activity-reflect">
                     <div class="data categories">
-                        <span class="data-title">Title</span>
-                        <span class="data-title">Information</span>
+                        <span class="data-title">Present Title</span>
+                        <span class="data-title" id="title">${val.title}</span>
+                        <span class="data-title">Present Information</span>
+                        <span class="data-title" id="info">${val.content}</span>
                         
                     </div>
                     <br>
                     <div class="data info">
                     <span class="data-list">
+                    <span class="data-title">Title Replacement</span>
                         <div class="input-box">
                             <input type="text" placeholder="Title" id="jobtitle">
                         </div>
@@ -219,6 +223,7 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
                    
                     
                     <span class="data-list">
+                    <span class="data-title">Information Replacement</span>
                         <div class="input-box">
                             <input type="text" placeholder="Information" id="jobinfo">
                         </div>
@@ -227,7 +232,7 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
                     <span class="buttons">
                         <span class="data-list">
                         <button type="button" class="button" onclick="window.location.href='/pages/taskguard.html' ">Back</button>
-                        <button type="button" class="button" href="/pages/manage.html" onClick="editMember(${val.id}) id="updateBtn">Update</button>
+                        <button type="button" class="button" href="/pages/manage.html" onClick="updateId(${val.id})" id="update">Update</button>
                         </span>
                     </span>
                 
@@ -252,6 +257,8 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
         
  
             function editMember(id){
+            let title = document.querySelector('#jobtitle').value;
+            let content = document.querySelector('#jobinfo').value;
             token = localStorage.getItem('access_token');
                     fetch(`https://create-eagleeye.herokuapp.com/posts/${id}`,{
                     method: 'GET',
@@ -260,18 +267,17 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
                             'Authorization': 'Bearer ' + token
                         }
                     })
-                    .then(res => res.json())
-                    .then( (data) => {
-
-                        document.querySelector('#jobtitle').value = data[0].title;
-                        document.querySelector('#jobinfo').value = data[0].content;
-                        
-                    });
+                    .then( res => res.json())  
+                    .then( data => {
+                        document.querySelector('#title').value = data.title; 
+                        document.querySelector('#info').value = data.content;
+                    })
+                    };
                 
-                }
-            const update = document.querySelector('#updateBtn');
+                
+          
 
-                update.addEventListener('click', ()=> {
+                function updateId(id){ 
                 token = localStorage.getItem('access_token');
                 let title = document.querySelector('#jobtitle').value;
                 let content = document.querySelector('#jobinfo').value;
@@ -279,27 +285,27 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
 
                 
 
-                fetch('https://create-eagleeye.herokuapp.com/posts/', {
+                fetch(`https://create-eagleeye.herokuapp.com/posts/${id}`, {
                     method: 'PUT',
                     body: JSON.stringify(formData),
                     headers: {
+                        'accept': 'application/json',
                         'Content-Type' : 'application/json',
                         'Authorization': 'Bearer ' + token
                     }
-                });
                 })
+            }
+                
                     
 
         
 //LOGOUT
-/*
+
 const logout = document.querySelector("#logout");
 logout.addEventListener('click', ()=> {
     window.localStorage.clear(); //clear all localstorage
     window.open(
           "login.html"
-        ); /*opens the target page while Id & password matches
-        
-});*/
-
+        ); 
+});
 
