@@ -32,11 +32,6 @@ const container = document.querySelector(".container"),
     login.addEventListener("click", ( )=>{
         container.classList.remove("active");
     });
-
-let   logEmail = document.querySelector('#loginEmail').value;
-let   logPassword = document.querySelector('#loginPassword').value;
-
-const log = document.querySelector('#signIn');
       
 /*
 log.addEventListener('click', (e) => {
@@ -70,24 +65,59 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
 });
 */
 
+function loginId (){
+let username = document.querySelector('#loginEmail').value;
+let password = document.querySelector('#loginPassword').value;
 
-const register = document.querySelector('#register'); 
-register.addEventListener('click', () => {
-let username = document.querySelector('#regEmail').value;
-let password = document.querySelector('#regPassword').value;
-let formData = { username, password };
+var details = {
+  'username' : username,
+  'password' : password,
+}
 
-  fetch('https://create-eagleeye.herokuapp.com/user', {
+var formBody = [];
+for (var property in details) {
+  var encodedKey = encodeURIComponent(property);
+  var encodedValue = encodeURIComponent(details[property]);
+  formBody.push(encodedKey + "=" + encodedValue);
+}
+formBody = formBody.join("&");
+
+
+  fetch('https://create-eagleeye.herokuapp.com/login', {
     method: 'POST',
     headers: {
-      'accept': 'application/json',
-      'Content-Type' : 'application/json'
+      'Content-Type' : 'application/x-www-form-urlencoded;charset=UTF-8'
     },
-    body: JSON.stringify({formData})
+    body: formBody
     
   }).then(res => {
-    return res.json()
-  }).then(data => console.log(data))
-  .catch(error => console.log(error))
-})
+    return res.json();
+  }).then(json => {
+    console.log(json);})
+    console.log(json['access_token']);
 
+
+  }
+
+function signupId () {
+  let username = document.querySelector('#regEmail').value;
+  let password = document.querySelector('#regPassword').value;
+  let formData = { username, password }
+  fetch('https://create-eagleeye.herokuapp.com/login', {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                    'accept': 'application/json',
+                    'Content-Type' : 'application/json'
+                },     
+            }).then(response => {
+                if (response.ok) {
+                    console.log("post success");
+                    }
+                    else {
+                        console.log("post failed");
+                    }
+                    return response;
+
+               }).then(response => console.log(response));
+               }
