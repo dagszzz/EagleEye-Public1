@@ -58,50 +58,27 @@ sidebarToggle.addEventListener("click", () => {
 
  
 //API CALLING
-activeCounter = document.querySelector('#activeCounter');
-//activeCounter.innerHTML = `${posts.length}`
-fetch('https://create-eagleeye.herokuapp.com/login', {
-        method: 'POST',
-        headers: {
-            'accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: 'grant_type=&username=ncrriego2019@plm.edu.ph&password=passkey&scope=&client_id=&client_secret='
-    }).then(res => {
-        return res.json();
-    }).then(json => {
-        console.log(json['access_token']);
-    /*
-    fetch('https://create-eagleeye.herokuapp.com/posts/', {
-            method: 'GET',
-            headers: {
-                'accept': 'application/json',
-                'Authorization': 'Bearer ' + json['access_token']
-            }
-        }).then(res => {
-            return res.json();
-        }).then(json => {   
-            console.log(json);
-            outjson(json);
-        });
-    */
-const   submit = document.querySelector("#submit");  
-        submit.addEventListener('click', ()=> {
+token = localStorage.getItem('access_token');
+posts_url = `https://create-eagleeye.herokuapp.com/posts/`;
+
+
+function submit() {
         let title = document.querySelector('#jobtitle').value;
         let content = document.querySelector('#jobinfo').value;
         let formData = { title,content };
 
-        fetch('https://create-eagleeye.herokuapp.com/posts/', {
+        fetch(posts_url, {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
                     'accept': 'application/json',
-                    'Authorization': 'Bearer ' + json['access_token'],
+                    'Authorization': 'Bearer ' + token,
                     'Content-Type' : 'application/json'
                 },     
             }).then(response => {
                 if (response.ok) {
                     console.log("post success");
+                    location.href = "/pages/taskguard.html"
                     }
                     else {
                         console.log("post failed");
@@ -109,16 +86,11 @@ const   submit = document.querySelector("#submit");
                     return response;
 
                }).then(response => console.log(response));
-               });
-   
+               }
     //sa taas maglagay ng new codes
-    });
 
-const logout = document.querySelector("#logout");
-logout.addEventListener('click', ()=> {
+
+function logout(){
     window.localStorage.clear(); //clear all localstorage
-    window.open(
-          "login.html"
-        ); 
-        
-});
+    location.href = "/pages/index.html"
+}

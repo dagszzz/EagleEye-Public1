@@ -93,9 +93,12 @@ formBody = formBody.join("&");
   }).then(res => {
     return res.json();
   }).then(json => {
-    console.log(json);})
+    console.log(json);
     console.log(json['access_token']);
-
+    localStorage.setItem('access_token',json.access_token);
+    localStorage.setItem('user',details.username);
+    location.href = "/pages/dashboard.html"
+  })
 
   }
 
@@ -105,12 +108,15 @@ function signupId () {
   let formData = { username, password }
   fetch('https://create-eagleeye.herokuapp.com/login', {
             method: 'POST',
-            body: JSON.stringify(formData),
             headers: {
-                    'accept': 'application/json',
+                    
+                Accept: "application/json, text/plain, */*",
                     'Content-Type' : 'application/json'
-                },     
-            }).then(response => {
+                },    
+                body: JSON.stringify(formData), 
+            }).then((response) => response.json())
+            .then((data) => {
+              console.log(data);
                 if (response.ok) {
                     console.log("post success");
                     }

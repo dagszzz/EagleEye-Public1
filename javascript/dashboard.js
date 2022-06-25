@@ -55,94 +55,29 @@ sidebarToggle.addEventListener("click", () => {
      input.value = input.value.replace(limit,"");
  }
  
-//API CALLING
+
+//CALLING FROM REGISTER HTML
 
 
-activeCounter = document.querySelector('#activeCounter');
-//activeCounter.innerHTML = `${posts.length}`
-let username = "ncrriego2019@plm.edu.ph";
-fetch('https://create-eagleeye.herokuapp.com/login', {
-    
-        method: 'POST',
-        headers: {
-            'accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: 'grant_type=&username=ncrriego2019@plm.edu.ph&password=passkey&scope=&client_id=&client_secret='
-    }).then(res => {
-        return res.json();
-    }).then(json => {
-        console.log(json);
+token = localStorage.getItem('access_token');
+username = localStorage.getItem('user');
+document.getElementById("helloUser").innerHTML = "Hello " + "\n" + username;
 
-        console.log(json['access_token']);
-    fetch('https://create-eagleeye.herokuapp.com/posts/', {
-            method: 'GET',
-            headers: {
-                'accept': 'application/json',
-                'Authorization': 'Bearer ' + json['access_token']
-            }
-        }).then(res => {
-            return res.json();
-        }).then(json => {
-            console.log(json);
-            outjson(json);
-        });
+// DASHBOARD PROPER
+const posts_url = 'https://create-eagleeye.herokuapp.com/posts/';
 
-const   submit = document.querySelector("#submit");  
-        submit.addEventListener('click', ()=> {
-        let title = document.querySelector('#jobtitle').value;
-        let content = document.querySelector('#jobinfo').value;
-        let formData = { title,content };
-
-        fetch('https://create-eagleeye.herokuapp.com/posts/', {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: {
-                    'accept': 'application/json',
-                    'Authorization': 'Bearer ' + json['access_token'],
-                    'Content-Type' : 'application/json'
-                },     
-            }).then(response => {
-                if (response.ok) {
-                    console.log("post success");
-                    }
-                    else {
-                        console.log("post failed");
-                    }
-                    return response;
-
-               }).then(response => console.log(response));
-               });
-   
-/*
-const   delButton = document.querySelector('.buttonPaper');
-        delButton.addEventListener('click', () => {
-        let id=1;
-
-    fetch('https://create-eagleeye.herokuapp.com/posts/31', {
-         method: 'DELETE',
-         headers: {
-            'Authorization': 'Bearer ' + json['access_token'],
-            'Content-Type' : 'application/json'
-        }
-
-     }).then(response => {
-         if (response.ok) {
-             console.log("delete success");
-         }
-         else {
-             console.log("delete failed");
-         }
-         return response;
-     }).then(response => console.log(response))
-    });
-*/
-    //sa taas maglagay ng new codes
-    });
-
-
-
-        
+fetch(posts_url, {
+    method: 'GET',
+    headers : {
+        'accept' : 'application/json',
+        'Authorization': 'Bearer ' + token
+    }
+}).then(res => {
+    return res.json();
+}).then(json => {
+    console.log(json);
+    outjson(json);
+})
 
 const output = document.querySelector('.activity-data');
 function outjson(val){
@@ -153,10 +88,6 @@ function outjson(val){
         view += `<div class="dash-content">
                     <div class="activity">
                     <div class="activity-data">
-                    <div class="data names">
-                        <span class="data-title">ID</span>
-                        <span class="data-list">${ele.id}.</span> 
-                    </div>
                     <div class="data email">
                         <span class="data-title">Title</span>
                         <span class="data-list">${ele.title}</span>
@@ -183,39 +114,14 @@ function outjson(val){
                     `;
         
     })
-    //html += `<small>${JSON.stringify(val)}</small>`;
     showJobs(view);
-   
+    }
 
-    
-}
-
-
-
-function showJobs(view){
-     output.innerHTML = view;
-}
-
-
-function editPost(id){
-
-    fetch(`https://create-eagleeye.herokuapp.com/posts/`)
-    .then(res => res.json())
-    .then( (data) => {
-
-        document.querySelector('#jobtitle').value = data[0].title;
-        document.querySelector('#jobinfo').value = data[0].content;
-        
-    });
-}
-
-
-
-const logout = document.querySelector("#logout");
-logout.addEventListener('click', ()=> {
+    function showJobs(view){
+        output.innerHTML = view;
+   }
+//LOGOUT
+function logout(){
     window.localStorage.clear(); //clear all localstorage
-    window.open(
-          "login.html"
-        );
-        
-});
+    location.href = "/pages/index.html"
+}

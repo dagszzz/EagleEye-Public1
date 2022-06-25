@@ -39,7 +39,7 @@
                 
 
                 <li>
-                    <a href="/pages/taskguard.html">
+                    <a href="/pages/manage.html">
                         <i class="uil uil-schedule"></i>
                         <span class="link-name">Manage</span>
                     </a>
@@ -60,9 +60,9 @@
             </ul>
             <ul class="logout-mode">
                 
-                <li><a id="logout">
+                <li><a>
                     <i class="uil uil-signout"></i>
-                    <span class="link-name">Logout</span>
+                    <span class="link-name" onclick="logout()">Logout</span>
                 </a></li>
             
                 <li class="mode">
@@ -105,7 +105,7 @@
                 <div class="boxes">
                     <div class="box box1">
                         <i class="uil uil-bell-school"></i>
-                        <span class="text">Welcome to Eagle Eye</span>
+                        <span class="text" id="helloUser">Welcome to Eagle Eye </span>
                         <span class="number" id="activeCounter"></span>
                     </div>
                 </div>

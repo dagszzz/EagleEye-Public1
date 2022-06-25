@@ -35,7 +35,7 @@
                 </li>
             
                 <li>
-                    <a href="/pages/taskguard.html">
+                    <a href="/pages/manage.html">
                         <i class="uil uil-schedule"></i>
                         <span class="link-name">Manage</span>
                     </a>
@@ -56,10 +56,10 @@
             </ul>
             <ul class="logout-mode">
         
-                <li><a href="/pages/login.html">
-                        <i class="uil uil-signout"></i>
-                        <span class="link-name">Logout</span>
-                    </a></li>
+                <li><a>
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name" onclick="logout()">Logout</span>
+                </a></li>
         
                 <li class="mode">
                     <a href="#">
@@ -130,7 +130,7 @@
                     <span class="buttons">
                         <span class="data-list">
                         <button type="button" class="button" onclick="window.location.href='/pages/dashboard.html' ">Back</button>
-                        <button type="button" class="button" onclick="window.location.href='/pages/dashboard.html' " id="submit" >Submit</button>
+                        <button type="button" class="button" onclick="submit()" id="submit" >Submit</button>
                         </span>
                     </span>
                 

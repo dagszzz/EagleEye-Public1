@@ -58,28 +58,15 @@ sidebarToggle.addEventListener("click", () => {
  
 //API CALLING
 
+token = localStorage.getItem('access_token');
+posts_url = `https://create-eagleeye.herokuapp.com/posts/`;
 
-//activeCounter = document.querySelector('#activeCounter');
-//activeCounter.innerHTML = `${posts.length}`
-fetch('https://create-eagleeye.herokuapp.com/login', {
-        method: 'POST',
-        headers: {
-            'accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: 'grant_type=&username=ncrriego2019@plm.edu.ph&password=passkey&scope=&client_id=&client_secret='
-    }).then(res => {
-        return res.json();
-    }).then(json => {
-        console.log(json);
-        console.log(json['access_token']);
-        localStorage.setItem('access_token',json.access_token);
 
-    fetch('https://create-eagleeye.herokuapp.com/posts/', {
+    fetch(posts_url, {
             method: 'GET',
             headers: {
                 'accept': 'application/json',
-                'Authorization': 'Bearer ' + json['access_token']
+                'Authorization': 'Bearer ' + token
             }
         }).then(res => {
             return res.json();
@@ -90,12 +77,11 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
 
 
         
-        });
 
 
                 function deleteMember(id){
                 token = localStorage.getItem('access_token')
-                    fetch(`https://create-eagleeye.herokuapp.com/posts/${id}`, {
+                    fetch(posts_url + `${id}`, {
                         method: 'DELETE',
                         headers: {
                            
@@ -110,7 +96,7 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
 
                 function ViewMember(id){
                     token = localStorage.getItem('access_token')
-                    fetch(`https://create-eagleeye.herokuapp.com/posts/${id}`,{
+                    fetch(posts_url + `${id}`,{
                         method: 'GET',
                         headers :{
                             'Content-Type' : 'application/json',
@@ -142,10 +128,6 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
                     view += `<div class="dash-content">
                                 <div class="activity">
                                 <div class="activity-data">
-                                <div class="data names">
-                                    <span class="data-title">ID</span>
-                                    <span class="data-list">${ele.id}.</span> 
-                                </div>
                                 <div class="data email">
                                     <span class="data-title">Title</span>
                                     <span class="data-list">${ele.title}</span>
@@ -260,7 +242,7 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
             let title = document.querySelector('#jobtitle').value;
             let content = document.querySelector('#jobinfo').value;
             token = localStorage.getItem('access_token');
-                    fetch(`https://create-eagleeye.herokuapp.com/posts/${id}`,{
+                    fetch(posts_url + `${id}`,{
                     method: 'GET',
                         headers :{
                             'Content-Type' : 'application/json',
@@ -285,7 +267,7 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
 
                 
 
-                fetch(`https://create-eagleeye.herokuapp.com/posts/${id}`, {
+                fetch(posts_url + `${id}`, {
                     method: 'PUT',
                     body: JSON.stringify(formData),
                     headers: {
@@ -300,12 +282,7 @@ fetch('https://create-eagleeye.herokuapp.com/login', {
 
         
 //LOGOUT
-
-const logout = document.querySelector("#logout");
-logout.addEventListener('click', ()=> {
+function logout(){
     window.localStorage.clear(); //clear all localstorage
-    window.open(
-          "login.html"
-        ); 
-});
-
+    location.href = "/pages/index.html"
+}
