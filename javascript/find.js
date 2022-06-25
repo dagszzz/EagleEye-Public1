@@ -215,3 +215,24 @@ const viewId = document.querySelector('.activity');
                 window.localStorage.clear(); //clear all localstorage
                 location.href = "/pages/index.html"
             } 
+/*
+function searchJob(query) {
+    fetch(posts_url + `${query}`,{
+        method : 'GET',
+        'accept': 'application/json',
+        'Authorization': 'Bearer ' + token
+    })
+    .then(response => response.json())
+    .then((jsonData) => {
+        const results = jsonData.map( element => element.title);
+        console.log(results);
+    })
+}
+
+window.onload = () => {
+    const searchFieldElement = document.getElementById("searchId");
+    searchFieldElement.onkeyup = (event) => {
+        searchJob(searchFieldElement.value);
+    }
+}
+*/
